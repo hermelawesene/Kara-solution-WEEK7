@@ -1,21 +1,40 @@
 
+# version: 2
+
+# models:
+#   - name: my_first_dbt_model
+#     description: "A starter dbt model"
+#     columns:
+#       - name: id
+#         description: "The primary key for this table"
+#         data_tests:
+#           - unique
+#           - not_null
+
+#   - name: my_second_dbt_model
+#     description: "A starter dbt model"
+#     columns:
+#       - name: id
+#         description: "The primary key for this table"
+#         data_tests:
+#           - unique
+#           - not_null
+
+# models/example/schema.yml
+
 version: 2
 
 models:
-  - name: my_first_dbt_model
-    description: "A starter dbt model"
+  - name: preprocessed_data_transformation
+    description: "This model transforms the raw data from MyTgData."
     columns:
-      - name: id
-        description: "The primary key for this table"
-        data_tests:
-          - unique
-          - not_null
+      - name: Id
+        description: "The price of the item, cleaned to be a numeric value."
+        tests:
+          - not_null  # Ensures that there are no null values in this column
+          - unique    # Ensures that all values are unique
 
-  - name: my_second_dbt_model
-    description: "A starter dbt model"
-    columns:
-      - name: id
-        description: "The primary key for this table"
-        data_tests:
-          - unique
-          - not_null
+      - name: channel_title
+        description: "The title of the channel from which the data is sourced."
+        tests:
+          - not_null  # Ensures that there are no null values in this column
